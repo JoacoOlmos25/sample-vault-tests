@@ -25,8 +25,8 @@ testUtils.createTestButton("Test Login - Password Incorrecto (Pepe y 123)", asyn
     
     const data = await response.json();
     testUtils.log(data);
-
-    if (response.ok) {
+// cambio response.ok a response.status === 401 porque estoy buscando que el test salga verde cuando haya un error 401 (error del usuario, osea puso mal la contraseña)
+    if (response.status === 401) {
         testUtils.setSuccess(btn);
     }
 });
@@ -40,8 +40,7 @@ testUtils.createTestButton("Test Login - Usuario Incorrecto (Juan y 12345)", asy
     
     const data = await response.json();
     testUtils.log(data);
-
-    if (response.ok) {
-        testUtils.setSuccess(btn);
+    if (response.status === 401) { //basicamente cambio lo mismo que arriba cambio el response.ok y me fijo si S
+       testUtils.setSuccess(btn);
     }
 });
